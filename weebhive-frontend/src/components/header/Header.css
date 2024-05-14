@@ -1,3 +1,7 @@
+button{
+  width: 120px;
+}
+
 #header{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 40%));
@@ -18,7 +22,20 @@
   font-size: 8vh;
 }
 #nav-bar-container{
-
   justify-self:center;
   margin-top: 22px;
+  display: block;
+  
 }
+#nav-button-container{
+  margin-left: -2px;
+  display:  grid;
+  position: absolute;
+  border-radius: 5px;
+  background-color: rgb(97, 97, 97);
+  padding: 3px;
+}
+#nav-button-container button{
+  margin: 1px;
+}
+
