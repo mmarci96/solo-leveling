@@ -4,14 +4,14 @@ button{
 
 #header{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 40%));
-  justify-content: space-between;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 40%));
+  justify-content:space-between;
   background-color: black;
   padding: 1%;
 }
 #icon{
   width: auto;
-  max-height: 90px;
+  max-height: 80px;
   min-height: 50px;
   height: 90%;
 }
@@ -19,11 +19,11 @@ button{
   display: flex;
 }
 #logo-title{
-  font-size: 8vh;
+  font-size: 28px;
 }
 #nav-bar-container{
   justify-self:center;
-  margin-top: 22px;
+  margin-top: 18px;
   display: block;
   
 }
