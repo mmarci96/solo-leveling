@@ -1,0 +1,22 @@
+#header{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 40%));
+  justify-content: space-between;
+  background-color: black;
+  padding: 1%;
+}
+#icon{
+  width: auto;
+  max-height: 90px;
+}
+#logo-container{
+  display: flex;
+}
+#logo-title{
+  font-size: 8vh;
+}
+#nav-bar-container{
+
+  justify-self:center;
+  margin-top: 24px;
+}
