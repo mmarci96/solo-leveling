@@ -1,7 +1,12 @@
+import Header from "../../components/header/Header"
 
 const BrowsePage = () => {
   return(
-    <div>Home page</div>
+    <> <Header/>
+    <div id='main'>
+
+    </div>
+    </>
   )
 }
 

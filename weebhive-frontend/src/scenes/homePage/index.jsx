@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import Header from '../../components/header/Header'
-import Registration from '../../components/Registration'
+import Registration from '../../components/forms/Registration'
 
 function HomePage() {
   const [loggedInUser, setLoggedInUser] = useState(null)

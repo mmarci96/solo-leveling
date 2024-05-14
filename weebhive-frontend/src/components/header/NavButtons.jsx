@@ -1,5 +1,5 @@
 
-const NavButtons = props => {
+const NavButtons = () => {
   const handleAnimeButton = e => {
     console.log(e);
     window.location = '/browse';
