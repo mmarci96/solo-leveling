@@ -35,6 +35,18 @@
       "email": "asd@as",
       "psw": "as",
       "id": 10004
+    },
+    {
+      "username": "kakiadmin",
+      "email": "as@as.as",
+      "psw": "qwer",
+      "id": 10005
+    },
+    {
+      "username": "kakiadmin",
+      "email": "as@as.as",
+      "psw": "qwer",
+      "id": 10006
     }
   ]
 }

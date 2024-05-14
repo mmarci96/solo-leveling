@@ -23,13 +23,13 @@ const Registration = () => {
     }
     if(newUserData){
       saveUser(newUserData);
+      
     } 
   },[newUserData])
 
   return(
     <div className="form-container">
       <form onSubmit={handleSubmit} className="sign-up-form">
-        
         <label>Username</label>
         <br></br>
         <input type='text'></input>

@@ -8,6 +8,8 @@
 #icon{
   width: auto;
   max-height: 90px;
+  min-height: 50px;
+  height: 90%;
 }
 #logo-container{
   display: flex;
@@ -18,5 +20,5 @@
 #nav-bar-container{
 
   justify-self:center;
-  margin-top: 24px;
+  margin-top: 22px;
 }

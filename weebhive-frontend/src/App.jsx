@@ -1,25 +1,23 @@
-import { useState } from 'react';
-import './App.css'
-import Header from './components/header/Header'
-import Registration from './components/Registration'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BrowsePage from "./scenes/browsePage";
+import HomePage from "./scenes/homePage";
+import NavBar from "./scenes/navbar";
+import ProfilesPage from "./scenes/profilePage";
+import LoginPage from "./scenes/loginPage";
 
-function App() {
-  const [userState, setUserState] = useState(null)
-  const signIn = () => {};
-  const signUp = () => {};
+const App = () => {
   return (
-    <>
-    <Header></Header>
-    <div className='main'>
-      <h2>Welcome</h2>
-      <p>Sign in to start browsing!</p>
-      <button onClick={signIn}>Sign in</button>
-      <button onClick={signUp}>Sign up</button>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/login" element={<LoginPage />}/>
+        <Route path="/browse" element={<BrowsePage />} />
+        <Route path="/navbar" element={<NavBar/>} />
+        <Route path="/profile" element={<ProfilesPage/>}/>
+        
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-      {userState === 'sign-up' ?? <Registration/>}
-    </div>
-    </>
-  )
-}
-
-export default App
+export default App;
