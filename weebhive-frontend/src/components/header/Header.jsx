@@ -7,7 +7,7 @@ const Header = () => {
       <div id='logo-container'><img id='icon' src='../icon.png'></img><h1 id='logo-title'>WeebHive</h1></div>
 
       <div id='nav-bar-container'>
-        <button>Social</button>
+        <button>Options</button>
       </div>
 
     </div>

@@ -4,9 +4,14 @@ import Header from '../../components/header/Header'
 import Registration from '../../components/Registration'
 
 function HomePage() {
+  const [loggedInUser, setLoggedInUser] = useState(null)
   useEffect(()=>{
-    const user = window.localStorage.getItem('LOGGED_IN');
-    user ?? console.log(user)
+    if(window.localStorage.getItem('LOGGED_IN')){
+      const user = window.localStorage.getItem('LOGGED_IN');
+      setLoggedInUser(JSON.parse(user));
+      console.log(user)
+    }
+    
   },[])
   const [userState, setUserState] = useState(false)
   const signIn = () => {
@@ -18,16 +23,21 @@ function HomePage() {
   return (
     <>
     <Header></Header>
-    <div className='main'>
-      {!userState ? <>
-        <h2>Welcome</h2>
-      <p>Sign in to start browsing!</p>
-      <button onClick={signIn}>Sign in</button>
-      <button onClick={signUp}>Sign up</button>
+    {!loggedInUser && <div className='welcome'>
+        {!userState ? <>
+          <h2>Welcome</h2>
+        <p>Sign in to start browsing!</p>
+        <button onClick={signIn}>Sign in</button>
+        <button onClick={signUp}>Sign up</button>
 
-      </> : <Registration/>}
-      
-    </div>
+        </> : <Registration/>}
+        
+      </div>}
+      {loggedInUser && (
+      <div className='after-login'>
+        <h3>hello {loggedInUser.username}</h3>
+      </div>
+      )}
     </>
   )
 }
