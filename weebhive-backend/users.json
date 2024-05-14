@@ -1,0 +1,16 @@
+{
+  "users":[
+    {
+      "id":9999,
+      "username":"admin",
+      "email":"weeb@hive.app",
+      "psw":"admin00"
+    },
+    {
+      "id":10000,
+      "username":"shit",
+      "email":"kaki@pisi.puki",
+      "psw":"123"
+    }
+  ]
+}
