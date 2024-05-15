@@ -1,4 +1,4 @@
-import AnimeItem from "../browsePage/browse-modules/AnimeItem";
+
 
 const ProfilesPage = () => {
   

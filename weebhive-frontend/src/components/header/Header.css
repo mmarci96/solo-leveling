@@ -40,4 +40,7 @@ button{
 #nav-button-container button{
   margin: 1px;
 }
-
+.sorting-buttons{
+  display: flex;
+  flex-wrap: nowrap;
+}
