@@ -1,7 +1,14 @@
+import AnimeItem from "../browsePage/browse-modules/AnimeItem";
 
 const ProfilesPage = () => {
+  
+  const {user} = JSON.parse(window.localStorage)
+  console.log(user)
   return(
-    <div>Home page</div>
+    
+    <div>
+      <h1>Profile page</h1>
+      </div>
   )
 }
 

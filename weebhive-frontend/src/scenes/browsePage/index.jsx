@@ -2,9 +2,10 @@
 import Header from "../../components/header/Header"
 import { useGlobalContext } from "../../context/global"
 import { Link } from 'react-router-dom'
-import './browsePage.css'
+import './browse-modules/BrowsePage.css'
 import { useEffect, useState } from "react"
 import Details from "../../components/contextDetail/Details"
+import SwipingGame from "./browse-modules/Swiping"
 
 const BrowsePage = () => {
   const { upcomingAnime } = useGlobalContext();
@@ -14,33 +15,68 @@ const BrowsePage = () => {
   const [favorite, setFavorite] = useState([0]);
   const [animeDetails, setAnimeDetails] = useState(null);
   const [displayList, setDisplayList] = useState(null);
-
+  const [searchValue, setSearchValue] = useState(null)
   const showDetails = anime => {
     setAnimeDetails(anime)
   }
   useEffect(()=>{
-    setDisplayList(popularAnime)
-  },[]);
+    setLetsDuel(null)
+    readySetGo(null)
+  },[displayList]);
 
   useEffect(()=>{
-    console.log('hi')
-  },[displayList])
+    if(searchValue){
+      console.log(searchValue)
+      const newList = displayList.filter(anime => {
+        anime.title.includes(searchValue)
+      })      
+    setDisplayList(newList);
+    }
+  },[searchValue])
 
   const removeFavorite = favi => {
     const favlist = favorite.filter(fav=>fav !== favi);
     setFavorite(favlist)
   }
+  const handleSearch = e => {
+    setSearchValue(e.target.value)
+  }
+  
+  const [letsPlay, readySetGo] = useState(null)
+  const [letsDuel, setLetsDuel] = useState(null)
+  useEffect(()=>{ 
+    if (displayList){
+      const tournament = [displayList[0], displayList[1],displayList[2], displayList[3]]
+      setLetsDuel(tournament)
+    }
+  },[letsPlay])
+  const handleWinner = (e) => {
+    console.log(e.target);
+  }
+  const handleStartSwipe = () => {
+    readySetGo(true);
+  }
   
   return(
   <> <Header/>
     <div id='main'>
-      <div>
-        {popularAnime && <button onClick={()=>setDisplayList(popularAnime)}>Most popular</button>}
-        {upcomingAnime && <button onClick={()=>setDisplayList(upcomingAnime)}>Top Upcoming</button>}
-        {airingAnime && <button onClick={()=>setDisplayList(airingAnime)}>Top Airing</button>}
-        <input type="search"></input>
+      <div className="sorting-elements-container">   
+        <div className="sorting-buttons">
+          {popularAnime && <button onClick={()=>setDisplayList(popularAnime)}>Most popular</button>}
+          {upcomingAnime && <button onClick={()=>setDisplayList(upcomingAnime)}>Top Upcoming</button>}
+          {airingAnime && <button onClick={()=>setDisplayList(airingAnime)}>Top Airing</button>}
+        </div>
+        <div className="search-div">
+          <input type="search" onChange={e => handleSearch(e)}></input>
+          <button onClick={()=>{handleStartSwipe()}}>Play</button>
+        </div>
+        <div>
+          
+        </div>
       </div>
-      {!animeDetails ? 
+      {letsPlay && letsDuel && 
+          <SwipingGame onClick={handleWinner}myAnimeList={letsDuel}/>}
+      {!animeDetails && !letsDuel ? 
       <div className="grid-list">{displayList && displayList.map((anime, index) => {
         return ( 
           <div className="card-container" key={index}>
