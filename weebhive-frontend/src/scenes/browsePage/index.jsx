@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "../../components/header/Header"
 import { useGlobalContext } from "../../context/global"
 import { Link } from 'react-router-dom'
 import './browsePage.css'
 import { useEffect, useState } from "react"
 import Details from "../../components/contextDetail/Details"
-import SortButtons from "../../components/contextDetail/SortButtons"
-import Upcoming from "../../components/contextDetail/Upcoming"
 
 const BrowsePage = () => {
   const { upcomingAnime } = useGlobalContext();
@@ -23,13 +21,18 @@ const BrowsePage = () => {
   useEffect(()=>{
     setDisplayList(popularAnime)
   },[]);
-  
+
   useEffect(()=>{
     console.log('hi')
   },[displayList])
+
+  const removeFavorite = favi => {
+    const favlist = favorite.filter(fav=>fav !== favi);
+    setFavorite(favlist)
+  }
   
   return(
-    <> <Header/>
+  <> <Header/>
     <div id='main'>
       <div>
         {popularAnime && <button onClick={()=>setDisplayList(popularAnime)}>Most popular</button>}
@@ -37,9 +40,9 @@ const BrowsePage = () => {
         {airingAnime && <button onClick={()=>setDisplayList(airingAnime)}>Top Airing</button>}
         <input type="search"></input>
       </div>
-      {!animeDetails ? <div className="grid-list">{displayList && displayList.map((anime, index) => {
-        return (
-          
+      {!animeDetails ? 
+      <div className="grid-list">{displayList && displayList.map((anime, index) => {
+        return ( 
           <div className="card-container" key={index}>
             <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
               <img src={anime.images.jpg.large_image_url} className="cover-pic" alt='cover'/>
@@ -50,18 +53,19 @@ const BrowsePage = () => {
             </div>
             <div className="button-container">
               <button onClick={()=>{showDetails(anime)}}>Details</button>
-              <button onClick={() => setFavorite(prev => [...prev,anime.mal_id])}>Favorite</button>
+                {favorite.includes(anime.mal_id)
+                ? <button onClick={()=>removeFavorite(anime.mal_id)}>Remove</button> :
+                <button onClick={() => setFavorite(prev => [...prev,anime.mal_id])}>Add</button>}
             </div>
           </div>)})}
       </div> : 
-          animeDetails && 
-          <div>
-            <button onClick={()=>setAnimeDetails(null)}>Back</button>
-            <Details animeData={animeDetails}/>
-          </div>}
-
+      animeDetails && 
+        <div>
+          <button onClick={()=>setAnimeDetails(null)}>Back</button>
+          <Details animeData={animeDetails}/>
+        </div>}
     </div>
-    </>
+  </>
   )
 }
 
