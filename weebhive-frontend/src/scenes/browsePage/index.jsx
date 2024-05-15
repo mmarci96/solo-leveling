@@ -5,30 +5,39 @@ import { Link } from 'react-router-dom'
 import './browsePage.css'
 import { useEffect, useState } from "react"
 import Details from "../../components/contextDetail/Details"
+import SortButtons from "../../components/contextDetail/SortButtons"
+import Upcoming from "../../components/contextDetail/Upcoming"
 
 const BrowsePage = () => {
+  const { upcomingAnime } = useGlobalContext();
+  const { popularAnime } = useGlobalContext();
+  const { airingAnime } = useGlobalContext();
+
   const [favorite, setFavorite] = useState([0]);
-  const [animeDetails, setAnimeDetails] = useState(null)
-  const {popularAnime} = useGlobalContext()
-  console.log(popularAnime)
+  const [animeDetails, setAnimeDetails] = useState(null);
+  const [displayList, setDisplayList] = useState(null);
+
   const showDetails = anime => {
     setAnimeDetails(anime)
   }
-  useEffect(() => {
-    if(animeDetails){
-      console.log(animeDetails)
-    }
-  },[animeDetails])
-
-  const addToFavorite = id => {
-    setFavorite(prev =>[ ... prev, id])
-
-  }
+  useEffect(()=>{
+    setDisplayList(popularAnime)
+  },[]);
+  
+  useEffect(()=>{
+    console.log('hi')
+  },[displayList])
   
   return(
     <> <Header/>
     <div id='main'>
-      {!animeDetails ? <div className="grid-list">{popularAnime && popularAnime.map((anime, index) => {
+      <div>
+        {popularAnime && <button onClick={()=>setDisplayList(popularAnime)}>Most popular</button>}
+        {upcomingAnime && <button onClick={()=>setDisplayList(upcomingAnime)}>Top Upcoming</button>}
+        {airingAnime && <button onClick={()=>setDisplayList(airingAnime)}>Top Airing</button>}
+        <input type="search"></input>
+      </div>
+      {!animeDetails ? <div className="grid-list">{displayList && displayList.map((anime, index) => {
         return (
           
           <div className="card-container" key={index}>
@@ -41,7 +50,7 @@ const BrowsePage = () => {
             </div>
             <div className="button-container">
               <button onClick={()=>{showDetails(anime)}}>Details</button>
-              <button onClick={() => addToFavorite(anime.mal_id)}>Favorite</button>
+              <button onClick={() => setFavorite(prev => [...prev,anime.mal_id])}>Favorite</button>
             </div>
           </div>)})}
       </div> : 

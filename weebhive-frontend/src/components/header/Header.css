@@ -3,7 +3,7 @@ button{
 }
 
 #header{
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fill, minmax(200px, 40%));
   justify-content:space-between;
   background-color: black;
@@ -17,6 +17,7 @@ button{
 }
 #logo-container{
   display: flex;
+  max-width: 200px;
 }
 #logo-title{
   font-size: 28px;
@@ -25,6 +26,7 @@ button{
   justify-self:center;
   margin-top: 18px;
   display: block;
+  z-index: 1;
   
 }
 #nav-button-container{

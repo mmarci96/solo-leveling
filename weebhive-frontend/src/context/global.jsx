@@ -5,6 +5,8 @@ import { createContext, useContext, useEffect, useReducer} from "react";
 
 const GlobalContext = createContext();
 const baseUrl = "https://api.jikan.moe/v4";
+const malUrl = 'https://api.myanimelist.net/v2/anime?q=one'
+
 
 export const GlobalContextProvider = ({children}) => {
   const LOADING = "LOADING";
@@ -20,6 +22,10 @@ export const GlobalContextProvider = ({children}) => {
         return {...state, loading: true}
       case GET_POPULAR_ANIME:
         return{...state, popularAnime: action.payload, loading: false}
+      case GET_AIRING_ANIME:
+        return{...state, airingAnime: action.payload, loading: false}
+      case GET_UPCOMING_ANIME:
+         return{...state, upcomingAnime: action.payload, loading: false}  
       default: return state
     }
   }
@@ -41,12 +47,41 @@ export const GlobalContextProvider = ({children}) => {
     dispatch({type: GET_POPULAR_ANIME, payload: data.data})
   }
   useEffect(() => {
-    getPopularAnime();
+    setTimeout(() => {
+      getPopularAnime();
+    }, 0);
+    
+  },[])
+
+  const getAiringAnime = async () => {
+    dispatch({type: LOADING})
+    const response = await fetch(`${baseUrl}/top/anime?filter=airing`)
+    const data = await response.json();
+    dispatch({type: GET_AIRING_ANIME, payload: data.data})
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      getAiringAnime();
+    }, 10000);  },[])
+
+  const getUpComingAnime = async () => {
+    dispatch({type: LOADING})
+    const response = await fetch(`${baseUrl}/top/anime?filter=upcoming`)
+    const data = await response.json();
+    dispatch({type: GET_UPCOMING_ANIME, payload: data.data})
+  }
+  useEffect(()=>{
+    setTimeout(() => {
+      getUpComingAnime()
+    }, 5000);  
   },[])
 
   return (
     <GlobalContext.Provider value={{
       ...state,
+      getPopularAnime,
+      getAiringAnime,
+      getUpComingAnime,
     }}>
       {children}
     </GlobalContext.Provider>
