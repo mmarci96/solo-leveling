@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
-import { useGlobalContext } from "../../../context/global.jsx";
+import { useEffect, useState } from "react";
 
-const UpComingAnime = (props) => {
+const SearchResults = (props) => {
   const rendered = props.rendered;
-
-  const { upcomingAnime } = useGlobalContext()
+  const results = props.list
+  const [displayList, setDisplayList] = useState(null)
+  useEffect(()=>{
+    setDisplayList(results);
+  },[results])
   
   return (
     <div className="grid-list" id="upcoming-list">
-      {rendered === 'upcoming' ?
-      upcomingAnime.map((anime, index) => {
+      {rendered === 'search' && displayList ?
+      displayList.map((anime, index) => {
         return ( 
           <div className="card-container" key={index}>
             <img src={anime.images.jpg.large_image_url} className="cover-pic" alt='cover'/>
@@ -30,4 +33,4 @@ const UpComingAnime = (props) => {
   
 }
 
-export default UpComingAnime
+export default SearchResults

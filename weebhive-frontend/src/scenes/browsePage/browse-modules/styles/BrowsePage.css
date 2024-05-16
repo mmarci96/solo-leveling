@@ -1,13 +1,14 @@
 #main{
   display: block;
-  width: 100%;
-  height: auto;
-  max-width: 1600px;
-  height: auto;
+  width: 94%;
+  max-width: 1920px;
   padding-top: 5px;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 #main h3{
   color: #f2f2f2;
+  font-size: max(16px);
 }
 .grid-list{
   margin-top: 5px;
@@ -28,72 +29,87 @@
 .cover-pic{
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border-radius: 5px;
-  transition: 0.4s ease-in;
-
+  transition: 0.3s;
 }
+.cover-pic:hover{
+  filter: blur(2px);
+  transform: scale(99%);
+}
+
 .card-container{
+  width: 91%;
+  width: minmax(200px, 400px);
   display: grid;
-  justify-content: center;
   border: 5px solid;
   border-radius: 10px;
   border-color: black;
-  margin: 5px;
-  padding: 0px;
-  transition: 0.4s ease-in;
-  box-shadow: rgb(43, 43, 43) 0px 20px 30px -10px;
-  z-index: 0;
+  margin: 4px;
+  padding: 2px;
+  transition: 0.3s ease;
+  box-shadow: rgb(18, 18, 18) 0px 20px 30px -10px;
+  margin-top: 10px;
+
+  height: 320px;
 }
-.cover-pic:hover{
-  filter: blur(3px);
+.card-container:hover{
+  transform: translateY(-5px);
+  border-width: 6px;
+  border-color: rgb(25, 25, 25);
+  box-shadow: rgb(16, 16, 16) 0px 20px 30px -10px;
+
   
 }
+
 .hidden{
   display: none;
   visibility: hidden;
-  top: 0;
-  width: 90%;
   font-weight: 700;
   padding: 10px;
   border-radius: 5px;
-  height: 95%;
-  transition: 0.3s ease-in;
   font-size: 1.2em;
   overflow: hidden;
   text-overflow: ellipsis;
+  top: 1%;
 }
 
-.card-container:hover{
-  transform: scale(1.1);
-  transform: translateY(-10px);
-
-}
-.card-container:hover > .hidden {
-  display: block;
+.card-container:hover .hidden {
+  width: 88%;
+  width: minmax(200px, 400px);
+  height: 91%;
+  transform: scale(105%);
+  display: grid;
   position: absolute;
   font-size: 1.2em;
   visibility: visible;
   pointer-events: none;
   background: linear-gradient(#1f1f1ff4, #f3f3f31d);
-  transform: scale(102%);
 }
 .hidden p {
   color: rgb(236, 236, 236);
   font-size: 16px;
 }
 .button-container{
+  height: 40px;
   margin-top: 0.3em;
   min-width: 95%;
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-self: end;
+
+  
 }
 .button-container button{
-  width: 120px;
+  height: 32px;
+  width: 80px;
   padding: 5px;
   margin: 3px;
+  position:relative;
+  
 }
+
+
 .sorting-elements-container{
   width: 100%;
   display: grid;

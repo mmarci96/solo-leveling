@@ -21,8 +21,7 @@ function HomePage() {
     setUserState(true)
   };
   return (
-    <>
-    <Header></Header>
+    <div className='main'>
     {!loggedInUser && <div className='welcome'>
         {!userState ? <>
           <h2>Welcome</h2>
@@ -38,7 +37,7 @@ function HomePage() {
         <h3>hello {loggedInUser.username}</h3>
       </div>
       )}
-    </>
+    </div>
   )
 }
 

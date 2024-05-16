@@ -4,7 +4,6 @@ import Header from "../../components/header/Header"
 const LoginPage = () => {
   return(
     <div>
-      <Header/>
       <LogInForm/>
     </div>
   )

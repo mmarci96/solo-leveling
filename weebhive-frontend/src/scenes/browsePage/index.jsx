@@ -1,17 +1,14 @@
-import { useGlobalContext } from "../../context/Global"
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useGlobalContext } from "../../context/global.jsx"
 import Header from "../../components/header/Header"
-import './browse-modules/BrowsePage.css'
-import { useState } from "react"
+import './browse-modules/styles/BrowsePage.css'
+import { useEffect, useState } from "react"
 import PopularAnime from "./browse-modules/PopularAnime"
-import AnimeListAll from "./browse-modules/AnimeListAll"
 import AiringAnime from "./browse-modules/AiringAnime"
 import UpComingAnime from "./browse-modules/UpComingAnime"
+import SearchResults from "./browse-modules/SearchResults.jsx"
 
 const BrowsePage = () => {
-  // const [animeDetails, setAnimeDetails] = useState(null);
-  // const showDetails = anime => {
-  //   setAnimeDetails(anime)
-  // }
 
   // const [favorite, setFavorite] = useState([0]);
   // const removeFavorite = favi => {
@@ -23,51 +20,81 @@ const BrowsePage = () => {
     getPopularAnime,
     getAiringAnime,
     getUpComingAnime,
+    popularAnime,
+    airingAnime,
+    upcomingAnime,
    } = useGlobalContext();
-   const [rendered, setRendered] = useState('popular');
-   const switchComponent = () => {
-    switch (rendered) {
-      case 'popular':
-        return <PopularAnime rendered={rendered} />;
-      case 'airing':
-        return <AiringAnime rendered={rendered} />
-      case 'upcoming': 
-        return <UpComingAnime rendered={rendered}/>;
-      default:
-        return <AnimeListAll rendered={rendered} />;
+  const [searchValue, setSearchValue] = useState(null);
+  const [searchResults, setSearchResults] = useState(null);
+  const [rendered, setRendered] = useState('popular');
+   useEffect(()=>{
+    console.log(rendered)
+   },[rendered])
+
+  useEffect(()=>{
+    if(searchValue){
+      if(rendered==='search'){
+        setSearchResults(prev => [...prev, ...popularAnime, ...airingAnime, ...upcomingAnime])
+        const results = searchResults.filter(anime => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
+        setSearchResults(results)
+      }
+      if (rendered.includes('popular')) {
+        const results = popularAnime.filter(anime => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
+        setSearchResults(results)
+        setRendered('search')
+      }else if(rendered.includes('airing')){
+        const results = airingAnime.filter(anime => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
+        setSearchResults(results)
+        setRendered('search')
+      }else if (rendered.includes('upcoming')){
+        const results = upcomingAnime.filter(anime => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
+        setSearchResults(results)
+        setRendered('search');
+      }
+    } else {
+      setRendered('popular')
     }
-  }
+  },[searchValue])
 
-  const handleSearch = e => {
-    console.log(e.target.value)
-  }
-
-  const handleClick = e => {
-    console.log(e)
-    setRendered('upcoming')
-    console.log(
-      getPopularAnime,
-      getAiringAnime,
-      getUpComingAnime,)
-  }
+  const SwitchComponent = () => {
+  switch (rendered) {
+    case 'popular':
+      return <PopularAnime rendered={rendered} />;
+    case 'airing':
+      return <AiringAnime rendered={rendered} />;
+    case 'upcoming': 
+      return <UpComingAnime rendered={rendered}/>;
+    case 'search':
+      return <SearchResults rendered={rendered} list={searchResults} />
+    default:
+      return <UpComingAnime rendered={rendered}/>;
+    }
+  } 
+  
 
   return (
-    <><Header/>
-      <div id='main'>
-        <div className="sorting-elements-container">   
-          <div className="sorting-buttons">
-            <button onClick={(event)=>handleClick(event)}>Most popular</button>
-            <button onClick={(event)=>handleClick(event)}>Top Upcoming</button>
-            <button onClick={(event)=>handleClick(event)}>Top Airing</button>
-          </div>
-          <div className="search-div">
-            <input type="search" onChange={e => handleSearch(e)}></input>
-            <button onClick={()=>{}}>Don.t click!</button>
-          </div>
+    <div id='main'>
+      <div className="sorting-elements-container">   
+        <div className="sorting-buttons">
+          <button onClick={()=>{
+            setRendered('popular')
+            getPopularAnime()}}>Most popular</button>
+
+          <button  onClick={()=>{
+            setRendered('upcoming')
+            getUpComingAnime()}}>Top Upcoming</button>
+
+          <button onClick={()=>{
+            setRendered('airing')
+            getAiringAnime()}}>Top Airing</button>
         </div>
-        {switchComponent()}
+        <div className="search-div">
+          <input type="search" onChange={e => setSearchValue(e.target.value)}></input>
+          <button onClick={()=>{}}>Don.t click!</button>
+        </div>
       </div>
-    </>
+      {SwitchComponent()}
+    </div>
   )
 }
 
