@@ -1,10 +1,28 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../context/global.jsx";
+
 
 const PopularAnime = (props) => {
   const rendered = props.rendered;
   
-  const { popularAnime } = useGlobalContext()
+  const { popularAnime, getMorePages, moreAnime } = useGlobalContext();
+  const [currentPageIndex, setCurrentPageIndex] = useState(1);
+
+  const handleNext = () => {
+    setCurrentPageIndex(prev => prev + 1)
+  }
+  useEffect(()=>{
+    const loadNextPage = async () => {
+      console.log(currentPageIndex)
+       getMorePages(currentPageIndex, 'bypopularity')
+       moreAnime;
+    }
+    loadNextPage();
+    console.log(moreAnime);
+  }, [currentPageIndex])
+
+
 
   return (
     <div className="grid-list" id="popular-list">
@@ -25,6 +43,10 @@ const PopularAnime = (props) => {
           )
         }) : 
       <p>Not quite right ? . -.+ . ! </p>}
+      <div>
+        <p>{currentPageIndex}</p>
+        <button className="next" onClick={()=>handleNext()} >Next</button>
+      </div>
     </div>
   )
   

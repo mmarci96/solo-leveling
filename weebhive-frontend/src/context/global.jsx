@@ -114,7 +114,7 @@ export const GlobalContextProvider = ({children}) => {
   const getMorePages = async (pageIndex, filter) => {
     dispatch({type: LOADING})
     try {
-      const response = await fetch(`${baseUrl}/top/anime?filter=${filter}?page=${pageIndex}`)
+      const response = await fetch(`${baseUrl}/top/anime?page=${pageIndex}`)
       const data = await response.json();
       dispatch({type: GET_MORE_ANIME, payload: data.data})
     } catch (error) {
@@ -124,6 +124,7 @@ export const GlobalContextProvider = ({children}) => {
 
   React.useEffect(() => {
     getPopularAnime();
+    getMorePages(2, 'bypopularity')
   },[])
   
   return (

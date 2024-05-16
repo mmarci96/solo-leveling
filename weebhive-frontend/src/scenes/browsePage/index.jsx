@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useGlobalContext } from "../../context/global.jsx"
-import Header from "../../components/header/Header"
 import './browse-modules/styles/BrowsePage.css'
 import { useEffect, useState } from "react"
 import PopularAnime from "./browse-modules/PopularAnime"
@@ -10,12 +9,6 @@ import SearchResults from "./browse-modules/SearchResults.jsx"
 
 const BrowsePage = () => {
 
-  // const [favorite, setFavorite] = useState([0]);
-  // const removeFavorite = favi => {
-  //   const favlist = favorite.filter(fav=>fav !== favi);
-  //   setFavorite(favlist)
-  // }
-  
   const { 
     getPopularAnime,
     getAiringAnime,
@@ -27,10 +20,7 @@ const BrowsePage = () => {
   const [searchValue, setSearchValue] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
   const [rendered, setRendered] = useState('popular');
-   useEffect(()=>{
-    console.log(rendered)
-   },[rendered])
-
+  
   useEffect(()=>{
     if(searchValue){
       if(rendered==='search'){
@@ -70,7 +60,6 @@ const BrowsePage = () => {
       return <UpComingAnime rendered={rendered}/>;
     }
   } 
-  
 
   return (
     <div id='main'>

@@ -19,6 +19,7 @@
   grid-gap: 5px;
   grid-template-rows: min-content;
   justify-content: center;
+  position:initial;
 }
 #title{
   font-size: 3.6vh;
@@ -29,12 +30,17 @@
 .cover-pic{
   width: 100%;
   height: 100%;
+  size: cover;
   border-radius: 5px;
-  transition: 0.3s;
+  transition: 0.3s ease;
+  border-bottom: #111111 solid;
+  border-width: 4px;
 }
 .cover-pic:hover{
   filter: blur(2px);
   transform: scale(99%);
+  border-bottom: #111111 solid;
+  border-width: 8px;
 }
 
 .card-container{
@@ -45,20 +51,18 @@
   border-radius: 10px;
   border-color: black;
   margin: 4px;
-  padding: 2px;
+  padding: 0px;
   transition: 0.3s ease;
-  box-shadow: rgb(18, 18, 18) 0px 20px 30px -10px;
+  box-shadow: rgb(18, 18, 18) 0px 20px 30px -15px;
   margin-top: 10px;
-
   height: 320px;
 }
 .card-container:hover{
   transform: translateY(-5px);
+  margin-bottom: -5px;
   border-width: 6px;
   border-color: rgb(25, 25, 25);
-  box-shadow: rgb(16, 16, 16) 0px 20px 30px -10px;
-
-  
+  box-shadow: rgb(16, 16, 16) 0px 20px 30px -10px;  
 }
 
 .hidden{
@@ -66,17 +70,18 @@
   visibility: hidden;
   font-weight: 700;
   padding: 10px;
+  padding-bottom: 0px;
   border-radius: 5px;
   font-size: 1.2em;
   overflow: hidden;
   text-overflow: ellipsis;
-  top: 1%;
+  transition: 0.3s ease;
 }
 
 .card-container:hover .hidden {
-  width: 88%;
+  width: 85%;
   width: minmax(200px, 400px);
-  height: 91%;
+  height: 93%;
   transform: scale(105%);
   display: grid;
   position: absolute;
@@ -84,6 +89,10 @@
   visibility: visible;
   pointer-events: none;
   background: linear-gradient(#1f1f1ff4, #f3f3f31d);
+  border:#101010db solid;
+  border-width: 6px;
+  border-radius: 10px;
+  padding-bottom: 0px;
 }
 .hidden p {
   color: rgb(236, 236, 236);
@@ -104,7 +113,7 @@
   height: 32px;
   width: 80px;
   padding: 5px;
-  margin: 3px;
+  margin: 5px;
   position:relative;
   
 }
