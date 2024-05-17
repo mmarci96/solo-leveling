@@ -2,8 +2,8 @@
 
 const ProfilesPage = () => {
   
-  const {user} = JSON.parse(window.localStorage)
-  console.log(user)
+  // const {user} = JSON.parse(window.localStorage)
+  // console.log(user)
   return(
     
     <div>

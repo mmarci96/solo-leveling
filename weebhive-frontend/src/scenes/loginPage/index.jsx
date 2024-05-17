@@ -1,5 +1,4 @@
 import LogInForm from "../../components/forms/LogInForm"
-import Header from "../../components/header/Header"
 
 const LoginPage = () => {
   return(

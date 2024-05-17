@@ -101,6 +101,24 @@
       "email": "katrinqilq@ove.marci",
       "psw": "123",
       "id": 10015
+    },
+    {
+      "username": "marci",
+      "email": "eds@mail.at",
+      "psw": "asdf",
+      "id": 10016
+    },
+    {
+      "username": "Marci",
+      "email": "kukac@worm.maggot",
+      "psw": "admin",
+      "id": 10017
+    },
+    {
+      "username": "MMM2112",
+      "email": "email@to.lo",
+      "psw": "admin",
+      "id": 10018
     }
   ]
 }

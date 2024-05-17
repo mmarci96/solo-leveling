@@ -1,15 +1,15 @@
 
 import { useEffect, useState } from 'react';
-import Header from '../../components/header/Header'
 import Registration from '../../components/forms/Registration'
+import './styles/home.css'
 
 function HomePage() {
+
   const [loggedInUser, setLoggedInUser] = useState(null)
   useEffect(()=>{
     if(window.localStorage.getItem('LOGGED_IN')){
       const user = window.localStorage.getItem('LOGGED_IN');
-      setLoggedInUser(JSON.parse(user));
-      console.log(user)
+      user && setLoggedInUser(JSON.parse(user));
     }
     
   },[])
@@ -34,7 +34,7 @@ function HomePage() {
       </div>}
       {loggedInUser && (
       <div className='after-login'>
-        <h3>hello {loggedInUser.username}</h3>
+        <h3>hello {loggedInUser.username ? loggedInUser.username : 'stranger'}</h3>
       </div>
       )}
     </div>

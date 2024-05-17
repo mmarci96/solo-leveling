@@ -33,7 +33,7 @@ const reducer = (state, action) => {
 export const GlobalContextProvider = ({children}) => {
   
   const initialState = {
-    moreAnime: [],
+    animeList: [],
     isSearch: false,
     searchResults: [],
     popularAnime: [],
@@ -111,10 +111,10 @@ export const GlobalContextProvider = ({children}) => {
       console.log(error)
     }
   }
-  const getMorePages = async (pageIndex, filter) => {
+  const getAnimeList = async (orderBy, pageIndex, top = '') => {
     dispatch({type: LOADING})
-    try {
-      const response = await fetch(`${baseUrl}/top/anime?page=${pageIndex}`)
+    try { 
+      const response = await fetch(`${baseUrl}/${top}anime?order_by=${orderBy}&page=${pageIndex}`)
       const data = await response.json();
       dispatch({type: GET_MORE_ANIME, payload: data.data})
     } catch (error) {
@@ -124,13 +124,11 @@ export const GlobalContextProvider = ({children}) => {
 
   React.useEffect(() => {
     getPopularAnime();
-    getMorePages(2, 'bypopularity')
   },[])
   
   return (
     <GlobalContext.Provider value={{
       ...state,
-      getMorePages,
       handleChange,
       handleSubmit,
       search,
@@ -138,6 +136,7 @@ export const GlobalContextProvider = ({children}) => {
       getPopularAnime,
       getAiringAnime,
       getUpComingAnime,
+      getAnimeList,
     }}>
       {children}
     </GlobalContext.Provider>

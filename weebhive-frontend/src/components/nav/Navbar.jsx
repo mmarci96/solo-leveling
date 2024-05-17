@@ -1,8 +1,8 @@
-import './Header.css'
+import './Navbar.css'
 import NavButtons from './NavButtons'
 import { useState } from 'react'
 
-const Header = () => {
+const Navbar = () => {
   const [showOptions, setShowOptions] = useState(false);
   const clickOptions = () => {
     showOptions ? setShowOptions(false) : setShowOptions(true)
@@ -10,10 +10,10 @@ const Header = () => {
 
   return (
     <div id='header'>
-      <div id='logo-container'><img id='icon' src='../icon.png'></img><h1 id='logo-title'>WeebHive</h1></div>
+      <div id='logo-container'  onClick={() => window.location = '/'}><img id='icon' src='../icon.png'></img><h1 id='logo-title'>WeebHive</h1></div>
 
       <div id='nav-bar-container'>
-        <button id='options' onClick={()=> clickOptions()}>Options</button>
+        <button id='options' onClick={()=> clickOptions()}>Menu</button>
         {showOptions ? <NavButtons/> : <></>}
       </div>
 
@@ -21,4 +21,4 @@ const Header = () => {
   )
 }
 
-export default Header;
+export default Navbar

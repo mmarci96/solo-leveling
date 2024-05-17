@@ -1,32 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../context/global.jsx";
 
 
 const PopularAnime = (props) => {
   const rendered = props.rendered;
   
-  const { popularAnime, getMorePages, moreAnime } = useGlobalContext();
-  const [currentPageIndex, setCurrentPageIndex] = useState(1);
-
-  const handleNext = () => {
-    setCurrentPageIndex(prev => prev + 1)
-  }
-  useEffect(()=>{
-    const loadNextPage = async () => {
-      console.log(currentPageIndex)
-       getMorePages(currentPageIndex, 'bypopularity')
-       moreAnime;
-    }
-    loadNextPage();
-    console.log(moreAnime);
-  }, [currentPageIndex])
-
-
-
+  const { popularAnime } = useGlobalContext();
+  
+  
   return (
     <div className="grid-list" id="popular-list">
-      {rendered === 'popular' ?
+      { rendered === 'popularity' ?
       popularAnime && popularAnime.map((anime, index) => {
         return ( 
           <div className="card-container" key={index}>
@@ -41,12 +26,7 @@ const PopularAnime = (props) => {
             </div>
           </div>
           )
-        }) : 
-      <p>Not quite right ? . -.+ . ! </p>}
-      <div>
-        <p>{currentPageIndex}</p>
-        <button className="next" onClick={()=>handleNext()} >Next</button>
-      </div>
+        }) : <p>having some trouble here..</p>}
     </div>
   )
   

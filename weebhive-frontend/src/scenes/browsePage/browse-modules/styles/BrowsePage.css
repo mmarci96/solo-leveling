@@ -17,10 +17,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill , minmax(200px, 12rem));
   grid-gap: 5px;
-  grid-template-rows: min-content;
   justify-content: center;
-  position:initial;
+  position: initial;
 }
+
 #title{
   font-size: 3.6vh;
   overflow: hidden;
@@ -29,8 +29,9 @@
 
 .cover-pic{
   width: 100%;
-  height: 100%;
-  size: cover;
+  height: auto;
+  max-height: 260px;
+  object-fit: cover;
   border-radius: 5px;
   transition: 0.3s ease;
   border-bottom: #111111 solid;
@@ -45,17 +46,15 @@
 
 .card-container{
   width: 91%;
-  width: minmax(200px, 400px);
   display: grid;
   border: 5px solid;
   border-radius: 10px;
   border-color: black;
-  margin: 4px;
+  margin: 5px;
   padding: 0px;
   transition: 0.3s ease;
   box-shadow: rgb(18, 18, 18) 0px 20px 30px -15px;
   margin-top: 10px;
-  height: 320px;
 }
 .card-container:hover{
   transform: translateY(-5px);
@@ -73,8 +72,6 @@
   padding-bottom: 0px;
   border-radius: 5px;
   font-size: 1.2em;
-  overflow: hidden;
-  text-overflow: ellipsis;
   transition: 0.3s ease;
 }
 
@@ -85,10 +82,9 @@
   transform: scale(105%);
   display: grid;
   position: absolute;
-  font-size: 1.2em;
   visibility: visible;
   pointer-events: none;
-  background: linear-gradient(#1f1f1ff4, #f3f3f31d);
+  background: linear-gradient(#121212e7, #f3f3f31d);
   border:#101010db solid;
   border-width: 6px;
   border-radius: 10px;
@@ -133,10 +129,10 @@
   padding-top: 1px;
   display: flex;
   justify-content: center;
-  width: fit-content;
-  border: solid #111111;
+  width: 97%;
+  border: solid #1c1c1c;
   border-radius: 10px;
-  border-width: 4px;
+  border-width: 2px;
   height: 36px;
 
 }
@@ -149,16 +145,22 @@
 }
 .sorting-elements-container input {
   height: 35px;
+  width: 100%;
 }
 .search-div button{
+  width: 150px;
   margin: 0px;
   height: 35px;
   padding: 6px;
   font-size: 0.9em;
+  
 }
 .sorting-buttons{
   margin-bottom: -5px;
   padding: 0;
+  min-width: 375px;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 @media screen and (max-device-width: 375px){
@@ -178,6 +180,7 @@
     margin: 0;
   }
 }
+
 #anime-card{
   margin-top: 5px;
   margin-left: 15px;
@@ -187,4 +190,16 @@
   grid-gap: 5px;
   grid-template-rows: min-content;
   justify-content: center;
+}
+.turn-page-button{
+  display: flex;
+  justify-content: space-evenly;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 10px;
+
+}
+.turn-page-button button{
+  max-height: 40px;
+  margin-top: 8px;
 }
