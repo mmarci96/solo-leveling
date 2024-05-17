@@ -6,11 +6,6 @@
       "email": "admin@qq.hi",
       "psw": "admin",
       "favorites": [
-        null,
-        null,
-        null,
-        null,
-        null,
         {
           "mal_id": 21
         },
@@ -31,6 +26,39 @@
         },
         {
           "mal_id": 36456
+        },
+        {
+          "mal_id": 16498
+        },
+        {
+          "mal_id": 1535
+        },
+        {
+          "mal_id": 5114
+        },
+        {
+          "mal_id": 30276
+        },
+        {
+          "mal_id": 11757
+        },
+        {
+          "mal_id": 38000
+        },
+        {
+          "mal_id": 21
+        },
+        {
+          "mal_id": 39894
+        },
+        {
+          "mal_id": 52742
+        },
+        {
+          "mal_id": 49458
+        },
+        {
+          "mal_id": 53410
         }
       ]
     },

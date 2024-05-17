@@ -44,6 +44,7 @@ export const GlobalContextProvider = ({ children }) => {
     loading: false,
     isDetailShow: false,
   }
+
   const [state, dispatch] = useReducer(reducer, initialState)
   const [search, setSearch] = useState('')
   const [isDetailShow, setIsShowDetails] = useState(false)
@@ -68,6 +69,7 @@ export const GlobalContextProvider = ({ children }) => {
       console.error(error)
     }
   }
+
   const getAnimePictures = async (id) => {
     dispatch({ type: LOADING })
     try {
@@ -112,7 +114,8 @@ export const GlobalContextProvider = ({ children }) => {
       console.log(error)
     }
   }
-  const getAnimeList = async (orderBy, pageIndex, orderOrFilter = 'order_by', top = '', ) => {
+
+  const getAnimeList = async (orderBy, pageIndex, orderOrFilter = 'order_by', top = '') => {
     dispatch({ type: LOADING })
     try {
       const response = await fetch(`${baseUrl}/${top}anime?${orderOrFilter}=${orderBy}&page=${pageIndex}`)
@@ -133,7 +136,7 @@ export const GlobalContextProvider = ({ children }) => {
       body: JSON.stringify(request),
     })
 
-    const createdFavorite = await httpResponse.json()
+    await httpResponse.json()
   }
 
   useEffect(() => {
