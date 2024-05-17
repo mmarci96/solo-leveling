@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useGlobalContext } from '../../context/global.jsx'
 import './browse-modules/styles/BrowsePage.css'
 import { useEffect, useState } from 'react'
@@ -9,14 +7,8 @@ import UpComingAnime from './browse-modules/UpComingAnime'
 import AnimeList from './browse-modules/AnimeList.jsx'
 
 const BrowsePage = () => {
-  const {
-    getAnimeList,
-    getPopularAnime,
-    getAiringAnime,
-    getUpComingAnime,
-    isDetailShow,
-    setIsShowDetails,
-  } = useGlobalContext()
+  const { getAnimeList, getPopularAnime, getAiringAnime, getUpComingAnime, isDetailShow, setIsShowDetails } =
+    useGlobalContext()
   const [rendered, setRendered] = useState('popularity')
   const [pageIndex, setPageIndex] = useState(1)
   const [originList, setOriginList] = useState('popularity')
@@ -46,16 +38,16 @@ const BrowsePage = () => {
   }
   const handleClickPrev = () => {
     if (pageIndex > 1) {
-        setPageIndex((prev) => prev - 1)
-        setRendered('anime')
+      setPageIndex((prev) => prev - 1)
+      setRendered('anime')
     } else {
       alert('Get some help')
     }
   }
   const handleClickNext = () => {
     if (pageIndex < 100) {
-        setPageIndex((prevPageIndex) => prevPageIndex + 1)
-        setRendered('anime')
+      setPageIndex((prevPageIndex) => prevPageIndex + 1)
+      setRendered('anime')
     } else {
       alert('EEnough... just choose from top10')
     }
@@ -67,6 +59,13 @@ const BrowsePage = () => {
       : getAnimeList(originList, pageIndex, 'filter', 'top/')
   }, [pageIndex])
 
+  const handleSorting = (sortBy = 'popularity') => {
+    setRendered(sortBy)
+    setOriginList(sortBy)
+    setPageIndex(1)
+    getPopularAnime()
+  }
+
   return (
     <div id="main">
       {!isDetailShow ? (
@@ -74,11 +73,9 @@ const BrowsePage = () => {
           <div className="sorting-elements-container">
             <div className="sorting-buttons">
               <button
+                value={'popularity'}
                 onClick={() => {
-                  setRendered('popularity')
-                  setOriginList('popularity')
-                  setPageIndex(1)
-                  getPopularAnime()
+                  handleSorting('popularity')
                 }}
               >
                 Most popular
@@ -86,10 +83,7 @@ const BrowsePage = () => {
 
               <button
                 onClick={() => {
-                  setRendered('upcoming')
-                  setOriginList('upcoming')
-                  setPageIndex(1)
-                  getUpComingAnime()
+                  handleSorting('upcoming')
                 }}
               >
                 Top Upcoming
@@ -97,10 +91,7 @@ const BrowsePage = () => {
 
               <button
                 onClick={() => {
-                  setRendered('airing')
-                  setOriginList('airing')
-                  setPageIndex(1)
-                  getAiringAnime()
+                  handleSorting('airing')
                 }}
               >
                 Top Airing
