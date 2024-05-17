@@ -3,27 +3,27 @@ import { useGlobalContext } from '../../../context/global.jsx'
 import Details from '../../../components/contextDetail/Details.jsx'
 
 const AiringAnime = ({ rendered }) => {
-  const userLog = window.localStorage.getItem('LOGGED_IN');
+  const userLog = window.localStorage.getItem('LOGGED_IN')
   const user = JSON.parse(userLog)
- 
   const { airingAnime, isDetailShow, setIsShowDetails, saveFavorite } = useGlobalContext()
   const [showDetails, setShowDetails] = useState(null)
   useEffect(() => {
-    if (showDetails) {
+    if (showDetails) { 
       setIsShowDetails(true)
-    }else{
+    } else {
       setIsShowDetails(false)
     }
   }, [showDetails])
+
   const handleAddFavorite = async (anime, user) => {
-    console.log(user, anime);
-    const saving = await saveFavorite(anime, user);
-    alert('sucess?')
+    console.log(user, anime)
+    await saveFavorite(anime, user)
   }
- 
-  return !isDetailShow  && !showDetails ? (
+
+  return !isDetailShow && !showDetails ? (
     <div className="grid-list" id="airing-list">
       {rendered === 'airing' ? (
+        airingAnime &&
         airingAnime.map((anime, index) => {
           return (
             <div className="card-container" key={index}>
@@ -34,7 +34,7 @@ const AiringAnime = ({ rendered }) => {
               </div>
               <div className="button-container">
                 <button onClick={() => setShowDetails(anime)}>Details</button>
-                <button onClick={()=> handleAddFavorite(anime.mal_id, user.id)}>Add</button>
+                <button onClick={() => handleAddFavorite(anime.mal_id, user.id)}>Add</button>
               </div>
             </div>
           )

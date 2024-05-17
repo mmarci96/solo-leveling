@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer, useState, useEffect } from 'react'
 
-
 const GlobalContext = createContext()
 const baseUrl = 'https://api.jikan.moe/v4'
 const LOADING = 'LOADING'
@@ -113,10 +112,10 @@ export const GlobalContextProvider = ({ children }) => {
       console.log(error)
     }
   }
-  const getAnimeList = async (orderBy, pageIndex, top = '') => {
+  const getAnimeList = async (orderBy, pageIndex, orderOrFilter = 'order_by', top = '', ) => {
     dispatch({ type: LOADING })
     try {
-      const response = await fetch(`${baseUrl}/${top}anime?order_by=${orderBy}&page=${pageIndex}`)
+      const response = await fetch(`${baseUrl}/${top}anime?${orderOrFilter}=${orderBy}&page=${pageIndex}`)
       const data = await response.json()
       dispatch({ type: GET_MORE_ANIME, payload: data.data })
     } catch (error) {
@@ -125,22 +124,20 @@ export const GlobalContextProvider = ({ children }) => {
   }
 
   const saveFavorite = async (malId, userId) => {
-    const request = {favorites: { mal_id: malId }}
+    const request = { favorites: { mal_id: malId } }
     const httpResponse = await fetch(`http://localhost:3001/api/users/${userId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        
       },
       body: JSON.stringify(request),
     })
 
     const createdFavorite = await httpResponse.json()
-    
   }
-  
 
   useEffect(() => {
+    getAnimeList('popularity', 1)
     getPopularAnime()
   }, [])
 
@@ -165,7 +162,6 @@ export const GlobalContextProvider = ({ children }) => {
     </GlobalContext.Provider>
   )
 }
-// eslint-disable-next-line react-refresh/only-export-components
 export const useGlobalContext = () => {
   return useContext(GlobalContext)
 }

@@ -7,9 +7,24 @@
       content="width=device-width, min-width=450px initial-scale=1.0"
     />
     <title>Weeb Hive</title>
+    <style>
+      .container {
+        opacity: 0;
+        transition: opacity 1s;
+      }
+
+      .container-loaded {
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="loading"></div>
+    <script>
+      $(document).ready(function() {
+        $('.loading').addClass('loading-loaded');
+      });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,2 +1,2 @@
 # solo-leveling
-Gaming database website
+backend-frontend anime db

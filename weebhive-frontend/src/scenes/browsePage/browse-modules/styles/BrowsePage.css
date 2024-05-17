@@ -1,10 +1,13 @@
 #main {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 94%;
   max-width: 1920px;
   padding-top: 5px;
   margin-left: 3%;
   margin-right: 3%;
+  transition: 0.3s ease-in;
 }
 #main h3 {
   color: #f2f2f2;
@@ -16,9 +19,12 @@
   margin-right: 15px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 12rem));
+  width: 100%;
+  max-width: 1024px;
   grid-gap: 5px;
   justify-content: center;
   position: initial;
+  transition: 0.3s ease-in;
 }
 
 #title {
@@ -52,9 +58,10 @@
   border-color: black;
   margin: 5px;
   padding: 0px;
-  transition: 0.3s ease;
+  transition: 0.3s ease-in;
   box-shadow: rgb(18, 18, 18) 0px 20px 30px -15px;
   margin-top: 10px;
+
 }
 .card-container:hover {
   transform: translateY(-5px);

@@ -6,24 +6,17 @@ import { useEffect, useState } from 'react'
 import PopularAnime from './browse-modules/PopularAnime'
 import AiringAnime from './browse-modules/AiringAnime'
 import UpComingAnime from './browse-modules/UpComingAnime'
-import SearchResults from './browse-modules/SearchResults.jsx'
 import AnimeList from './browse-modules/AnimeList.jsx'
 
 const BrowsePage = () => {
   const {
     getAnimeList,
-    moreAnime,
     getPopularAnime,
     getAiringAnime,
     getUpComingAnime,
-    popularAnime,
-    airingAnime,
-    upcomingAnime,
     isDetailShow,
     setIsShowDetails,
   } = useGlobalContext()
-  const [searchValue, setSearchValue] = useState(null)
-  const [searchResults, setSearchResults] = useState(null)
   const [rendered, setRendered] = useState('popularity')
   const [pageIndex, setPageIndex] = useState(1)
   const [originList, setOriginList] = useState('popularity')
@@ -37,38 +30,6 @@ const BrowsePage = () => {
     }
   }, [isDetailShow])
 
-  useEffect(() => {
-    if (searchValue) {
-      if (rendered === 'search') {
-        setSearchResults((prev) => [
-          ...prev,
-          ...popularAnime,
-          ...airingAnime,
-          ...upcomingAnime,
-          ...(moreAnime ?? moreAnime),
-        ])
-        const results = searchResults.filter((anime) => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
-        setSearchResults(results)
-      }
-      if (rendered.includes('popularity')) {
-        const results = popularAnime.filter((anime) => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
-        setSearchResults(results)
-        setRendered('search')
-      } else if (rendered.includes('airing')) {
-        const results = airingAnime.filter((anime) => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
-        setSearchResults(results)
-        setRendered('search')
-      } else if (rendered.includes('upcoming')) {
-        const results = upcomingAnime.filter((anime) => anime.title.toLowerCase().includes(searchValue.toLowerCase()))
-        setSearchResults(results)
-        setRendered('search')
-      }
-    } else {
-      setRendered('popularity')
-      setPageIndex(1)
-    }
-  }, [searchValue, searchResults])
-
   const SwitchComponent = () => {
     switch (rendered) {
       case 'popularity':
@@ -77,33 +38,33 @@ const BrowsePage = () => {
         return <AiringAnime rendered={rendered} />
       case 'upcoming':
         return <UpComingAnime rendered={rendered} />
-      case 'search':
-        return <SearchResults rendered={rendered} list={searchResults} />
       case 'anime':
-        return <AnimeList index={pageIndex} orderBy={'popularity'} rendered={rendered} />
+        return <AnimeList index={pageIndex} orderBy={originList} rendered={rendered} />
       default:
         return <PopularAnime rendered={rendered} />
     }
   }
   const handleClickPrev = () => {
     if (pageIndex > 1) {
-      setPageIndex((prev) => prev - 1)
-      setRendered('anime')
+        setPageIndex((prev) => prev - 1)
+        setRendered('anime')
     } else {
       alert('Get some help')
     }
   }
   const handleClickNext = () => {
     if (pageIndex < 100) {
-      setPageIndex((prevPageIndex) => prevPageIndex + 1)
-      setRendered('anime')
+        setPageIndex((prevPageIndex) => prevPageIndex + 1)
+        setRendered('anime')
     } else {
       alert('EEnough... just choose from top10')
     }
   }
 
   useEffect(() => {
-    originList === 'popularity' ? getAnimeList(originList, pageIndex) : getAnimeList(originList, pageIndex, 'top/')
+    originList === 'popularity'
+      ? getAnimeList(originList, pageIndex)
+      : getAnimeList(originList, pageIndex, 'filter', 'top/')
   }, [pageIndex])
 
   return (
@@ -115,6 +76,7 @@ const BrowsePage = () => {
               <button
                 onClick={() => {
                   setRendered('popularity')
+                  setOriginList('popularity')
                   setPageIndex(1)
                   getPopularAnime()
                 }}
@@ -125,6 +87,7 @@ const BrowsePage = () => {
               <button
                 onClick={() => {
                   setRendered('upcoming')
+                  setOriginList('upcoming')
                   setPageIndex(1)
                   getUpComingAnime()
                 }}
@@ -135,6 +98,7 @@ const BrowsePage = () => {
               <button
                 onClick={() => {
                   setRendered('airing')
+                  setOriginList('airing')
                   setPageIndex(1)
                   getAiringAnime()
                 }}
@@ -145,7 +109,7 @@ const BrowsePage = () => {
             <div className="search-div">
               <input type="search" onChange={(e) => setSearchValue(e.target.value)}></input>
               <button
-                className='search-button'
+                className="search-button"
                 onClick={() => {
                   setRendered('anime')
                 }}
