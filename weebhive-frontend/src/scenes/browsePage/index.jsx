@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useGlobalContext } from '../../context/global.jsx'
 import './browse-modules/styles/BrowsePage.css'
 import { useEffect, useState } from 'react'
@@ -7,22 +5,20 @@ import PopularAnime from './browse-modules/PopularAnime'
 import AiringAnime from './browse-modules/AiringAnime'
 import UpComingAnime from './browse-modules/UpComingAnime'
 import AnimeList from './browse-modules/AnimeList.jsx'
+import HeaderForSorting from '../../components/contextDetail/Header.jsx'
 
 const BrowsePage = () => {
-  const {
-    getAnimeList,
-    getPopularAnime,
-    getAiringAnime,
-    getUpComingAnime,
-    isDetailShow,
-    setIsShowDetails,
-  } = useGlobalContext()
+  const { getAnimeList, getPopularAnime, getAiringAnime, getUpComingAnime, isDetailShow, setIsShowDetails } =
+    useGlobalContext()
   const [rendered, setRendered] = useState('popularity')
   const [pageIndex, setPageIndex] = useState(1)
   const [originList, setOriginList] = useState('popularity')
   useEffect(() => {
     ;(rendered !== 'anime' && rendered !== 'search') ?? setOriginList(rendered)
   }, [rendered])
+
+  useEffect(() => {
+  }, [pageIndex])
 
   useEffect(() => {
     if (isDetailShow === false) {
@@ -44,96 +40,51 @@ const BrowsePage = () => {
         return <PopularAnime rendered={rendered} />
     }
   }
-  const handleClickPrev = () => {
-    if (pageIndex > 1) {
-        setPageIndex((prev) => prev - 1)
-        setRendered('anime')
+
+  const handleClickNext = (direction) => {
+    if (!direction) {
+      setPageIndex((prev) => prev - 1)
+      setRendered('anime')
+    }    
+    if (pageIndex < 100 && direction) {
+      setPageIndex((prevPageIndex) => prevPageIndex + 1)
+      setRendered('anime')
     } else {
-      alert('Get some help')
-    }
-  }
-  const handleClickNext = () => {
-    if (pageIndex < 100) {
-        setPageIndex((prevPageIndex) => prevPageIndex + 1)
-        setRendered('anime')
-    } else {
-      alert('EEnough... just choose from top10')
+      direction ?? alert('Get some help')
     }
   }
 
   useEffect(() => {
+    pageIndex > 1 ?? setRendered('anime')
     originList === 'popularity'
       ? getAnimeList(originList, pageIndex)
       : getAnimeList(originList, pageIndex, 'filter', 'top/')
   }, [pageIndex])
 
+  const handleRenderButton = (sort) => {
+    setRendered(sort)
+    setOriginList(sort)
+    setPageIndex(1)
+  }
+
   return (
     <div id="main">
       {!isDetailShow ? (
         <>
-          <div className="sorting-elements-container">
-            <div className="sorting-buttons">
-              <button
-                onClick={() => {
-                  setRendered('popularity')
-                  setOriginList('popularity')
-                  setPageIndex(1)
-                  getPopularAnime()
-                }}
-              >
-                Most popular
-              </button>
-
-              <button
-                onClick={() => {
-                  setRendered('upcoming')
-                  setOriginList('upcoming')
-                  setPageIndex(1)
-                  getUpComingAnime()
-                }}
-              >
-                Top Upcoming
-              </button>
-
-              <button
-                onClick={() => {
-                  setRendered('airing')
-                  setOriginList('airing')
-                  setPageIndex(1)
-                  getAiringAnime()
-                }}
-              >
-                Top Airing
-              </button>
-            </div>
-            <div className="search-div">
-              <input type="search" onChange={(e) => setSearchValue(e.target.value)}></input>
-              <button
-                className="search-button"
-                onClick={() => {
-                  setRendered('anime')
-                }}
-              >
-                Don.t click!
-              </button>
-            </div>
-          </div>
-          <>
+          <HeaderForSorting handleRenderButton={handleRenderButton} setRendered={setRendered} />
             <div className="turn-page-button">
-              <button onClick={handleClickPrev} className="prev-button">
+              <button onClick={()=>handleClickNext(false)} className="prev-button">
                 Previous
               </button>
               <p>{pageIndex} / 100</p>
-              <button onClick={handleClickNext} className="next-button">
+              <button onClick={()=>handleClickNext('next')} className="next-button">
                 Next
               </button>
-            </div>{' '}
+            </div>
           </>
-        </>
       ) : (
         <button onClick={() => setIsShowDetails(false)}>Return</button>
       )}
-
       {SwitchComponent()}
     </div>
   )
