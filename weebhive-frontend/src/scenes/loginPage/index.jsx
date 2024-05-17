@@ -1,13 +1,11 @@
-import LogInForm from "../../components/LogInForm"
-import Header from "../../components/header/Header"
+import LogInForm from "../../components/forms/LogInForm";
 
 const LoginPage = () => {
-  return(
+  return (
     <div>
-      <Header/>
-      <LogInForm/>
+      <LogInForm />
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;

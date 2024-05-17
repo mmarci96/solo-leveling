@@ -1,0 +1,51 @@
+button {
+  width: 120px;
+}
+
+#header {
+  display: flex;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 40%));
+  justify-content: space-between;
+  background-color: black;
+  padding: 1%;
+}
+#icon {
+  width: auto;
+  max-height: 80px;
+  min-height: 50px;
+  height: 90%;
+}
+#logo-container {
+  display: flex;
+  max-width: 200px;
+}
+#logo-title {
+  font-size: 28px;
+}
+#nav-bar-container {
+  justify-self: center;
+  margin-top: 18px;
+  display: block;
+  z-index: 1;
+  position: sticky;
+}
+#nav-button-container {
+  display: grid;
+  position: absolute;
+  right: 15px;
+  border-radius: 5px;
+  background-color: rgb(97, 97, 97);
+  padding: 3px;
+}
+#nav-button-container button {
+  margin: 1px;
+}
+.sorting-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+#options{
+  width:140px;
+  right: 5px
+
+}

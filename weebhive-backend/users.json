@@ -3,50 +3,81 @@
     {
       "id": 9999,
       "username": "admin",
-      "email": "weeb@hive.app",
-      "psw": "admin00"
+      "email": "admin@qq.hi",
+      "psw": "admin",
+      "favorites": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "mal_id": 21
+        },
+        {
+          "mal_id": 39894
+        },
+        {
+          "mal_id": 52742
+        },
+        {
+          "mal_id": 21
+        },
+        {
+          "mal_id": 21
+        },
+        {
+          "mal_id": 39894
+        },
+        {
+          "mal_id": 36456
+        }
+      ]
     },
     {
+      "username": "Marci",
+      "email": "mmm@jk.yk",
+      "psw": "admin",
       "id": 10000,
-      "username": "shit",
-      "email": "kaki@pisi.puki",
-      "psw": "123"
+      "favorites": [
+        {
+          "mal_id": 2
+        },
+        {
+          "mal_id": 666
+        },
+        {
+          "mal_id": 420
+        },
+        {
+          "mal_id": 69
+        },
+        {
+          "mal_id": 6
+        },
+        {
+          "mal_id": 698
+        }
+      ]
     },
     {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
+      "username": "Friday",
+      "email": "not@the.slave",
+      "psw": "friday",
       "id": 10001
     },
     {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
+      "username": "test",
+      "email": "water@tesing.cold",
+      "psw": "rrr",
       "id": 10002
     },
     {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
-      "id": 10003
-    },
-    {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
-      "id": 10004
-    },
-    {
-      "username": "kakiadmin",
-      "email": "as@as.as",
-      "psw": "qwer",
-      "id": 10005
-    },
-    {
-      "username": "kakiadmin",
-      "email": "as@as.as",
-      "psw": "qwer",
-      "id": 10006
+      "username": "test",
+      "email": "test@work.pls",
+      "psw": "bigl",
+      "id": 10003,
+      "favorites": []
     }
   ]
 }
