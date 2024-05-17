@@ -3,122 +3,63 @@
     {
       "id": 9999,
       "username": "admin",
-      "email": "weeb@hive.app",
-      "psw": "admin00"
-    },
-    {
-      "id": 10000,
-      "username": "shit",
-      "email": "kaki@pisi.puki",
-      "psw": "123"
-    },
-    {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
-      "id": 10001
-    },
-    {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
-      "id": 10002
-    },
-    {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
-      "id": 10003
-    },
-    {
-      "username": "asd",
-      "email": "asd@as",
-      "psw": "as",
-      "id": 10004
-    },
-    {
-      "username": "kakiadmin",
-      "email": "as@as.as",
-      "psw": "qwer",
-      "id": 10005
-    },
-    {
-      "username": "kakiadmin",
-      "email": "as@as.as",
-      "psw": "qwer",
-      "id": 10006
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10007
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10008
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10009
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10010
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10011
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10012
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10013
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10014
-    },
-    {
-      "username": "katrina",
-      "email": "katrinqilq@ove.marci",
-      "psw": "123",
-      "id": 10015
-    },
-    {
-      "username": "marci",
-      "email": "eds@mail.at",
-      "psw": "asdf",
-      "id": 10016
+      "email": "admin@qq.hi",
+      "psw": "admin",
+      "favorites": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        {
+          "mal_id": 21
+        }
+      ]
     },
     {
       "username": "Marci",
-      "email": "kukac@worm.maggot",
+      "email": "mmm@jk.yk",
       "psw": "admin",
-      "id": 10017
+      "id": 10000,
+      "favorites": [
+        {
+          "mal_id": 2
+        },
+        {
+          "mal_id": 666
+        },
+        {
+          "mal_id": 420
+        },
+        {
+          "mal_id": 69
+        },
+        {
+          "mal_id": 6
+        },
+        {
+          "mal_id": 698
+        }
+      ]
     },
     {
-      "username": "MMM2112",
-      "email": "email@to.lo",
-      "psw": "admin",
-      "id": 10018
+      "username": "Friday",
+      "email": "not@the.slave",
+      "psw": "friday",
+      "id": 10001
+    },
+    {
+      "username": "test",
+      "email": "water@tesing.cold",
+      "psw": "rrr",
+      "id": 10002
+    },
+    {
+      "username": "test",
+      "email": "test@work.pls",
+      "psw": "bigl",
+      "id": 10003,
+      "favorites": []
     }
   ]
 }

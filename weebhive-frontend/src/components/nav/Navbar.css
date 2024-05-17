@@ -27,11 +27,12 @@ button {
   margin-top: 18px;
   display: block;
   z-index: 1;
+  position: sticky;
 }
 #nav-button-container {
-  margin-left: -2px;
   display: grid;
   position: absolute;
+  right: 15px;
   border-radius: 5px;
   background-color: rgb(97, 97, 97);
   padding: 3px;
@@ -42,4 +43,9 @@ button {
 .sorting-buttons {
   display: flex;
   flex-wrap: nowrap;
+}
+#options{
+  width:140px;
+  right: 5px
+
 }

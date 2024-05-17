@@ -52,7 +52,7 @@ const LogInForm = () => {
         </p>
       )}
       <p>
-        Click <a href="/login">here</a> to create a new account!
+        Click <a href="/">here</a> to create a new account!
       </p>
     </div>
   );

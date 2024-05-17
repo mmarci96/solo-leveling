@@ -13,7 +13,7 @@ const Details = ({ animeData }) => {
     images,
     trailer,
     url,
-  } = animeData;
+  } = animeData
 
   return (
     <div className="anime-details">
@@ -37,7 +37,7 @@ const Details = ({ animeData }) => {
         <strong>Favorites:</strong> {favorites}
       </p>
       <div>
-        <strong>Genres:</strong>{" "}
+        <strong>Genres:</strong>{' '}
         {genres.map((genre) => (
           <span key={genre.mal_id}>{genre.name} </span>
         ))}
@@ -50,7 +50,7 @@ const Details = ({ animeData }) => {
         More Details
       </a>
     </div>
-  );
-};
+  )
+}
 
-export default Details;
+export default Details
