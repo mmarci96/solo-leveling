@@ -1,10 +1,21 @@
-import { GlobalContextProvider, useGlobalContext } from "../../context/global"
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { useGlobalContext } from '../../context/global'
 
-const HeaderForSorting = (props) => {
-  const { getPopularAnime, getAiringAnime, getUpComingAnime} =
-    useGlobalContext()
-  const handleRenderButton = props.handleRenderButton
-  const setRendered = props.setRendered
+const HeaderForSorting = ({ handleRenderButton, setRendered }) => {
+  const { getPopularAnime, getAiringAnime, getUpComingAnime, searchAnime } = useGlobalContext()
+  const [searchQuery, setSearchQuery] = useState('')
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value)
+  }
+
+  const handleSearchSubmit = () => {
+    if (searchQuery.trim()) {
+      searchAnime(searchQuery)
+      setRendered('search')
+    }
+  }
 
   return (
     <div className="sorting-elements-container">
@@ -15,7 +26,7 @@ const HeaderForSorting = (props) => {
             handleRenderButton('popularity')
           }}
         >
-          Most popular
+          Most Popular
         </button>
         <button
           onClick={() => {
@@ -35,18 +46,18 @@ const HeaderForSorting = (props) => {
         </button>
       </div>
       <div className="search-div">
-        <input type="search" onChange={(e) => console.log(e.target.value)}></input>
-        <button
-          className="search-button"
-          onClick={() => {
-            setRendered('anime')
-          }}
-        >
-          Don.t click!
+        <input type="search" value={searchQuery} onChange={handleSearchChange} placeholder="Search anime..." />
+        <button className="search-button" onClick={handleSearchSubmit}>
+          Search
         </button>
       </div>
     </div>
   )
+}
+
+HeaderForSorting.propTypes = {
+  handleRenderButton: PropTypes.func.isRequired,
+  setRendered: PropTypes.func.isRequired,
 }
 
 export default HeaderForSorting

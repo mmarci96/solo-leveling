@@ -1,3 +1,6 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+
 const Details = ({ animeData }) => {
   const {
     title,
@@ -51,6 +54,37 @@ const Details = ({ animeData }) => {
       </a>
     </div>
   )
+}
+
+Details.propTypes = {
+  animeData: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    title_english: PropTypes.string,
+    title_japanese: PropTypes.string,
+    aired: PropTypes.shape({
+      string: PropTypes.string,
+    }).isRequired,
+    episodes: PropTypes.number,
+    score: PropTypes.number,
+    members: PropTypes.number,
+    favorites: PropTypes.number,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        mal_id: PropTypes.number,
+        name: PropTypes.string,
+      })
+    ).isRequired,
+    synopsis: PropTypes.string,
+    images: PropTypes.shape({
+      jpg: PropTypes.shape({
+        image_url: PropTypes.string,
+      }).isRequired,
+    }).isRequired,
+    trailer: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+    url: PropTypes.string,
+  }).isRequired,
 }
 
 export default Details
