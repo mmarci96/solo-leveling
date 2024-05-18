@@ -17,8 +17,7 @@ const BrowsePage = () => {
     ;(rendered !== 'anime' && rendered !== 'search') ?? setOriginList(rendered)
   }, [rendered])
 
-  useEffect(() => {
-  }, [pageIndex])
+  useEffect(() => {}, [pageIndex])
 
   useEffect(() => {
     if (isDetailShow === false) {
@@ -45,7 +44,7 @@ const BrowsePage = () => {
     if (!direction) {
       setPageIndex((prev) => prev - 1)
       setRendered('anime')
-    }    
+    }
     if (pageIndex < 100 && direction) {
       setPageIndex((prevPageIndex) => prevPageIndex + 1)
       setRendered('anime')
@@ -72,16 +71,16 @@ const BrowsePage = () => {
       {!isDetailShow ? (
         <>
           <HeaderForSorting handleRenderButton={handleRenderButton} setRendered={setRendered} />
-            <div className="turn-page-button">
-              <button onClick={()=>handleClickNext(false)} className="prev-button">
-                Previous
-              </button>
-              <p>{pageIndex} / 100</p>
-              <button onClick={()=>handleClickNext('next')} className="next-button">
-                Next
-              </button>
-            </div>
-          </>
+          <div className="turn-page-button">
+            <button onClick={() => handleClickNext(false)} className="prev-button">
+              Previous
+            </button>
+            <p>{pageIndex} / 100</p>
+            <button onClick={() => handleClickNext('next')} className="next-button">
+              Next
+            </button>
+          </div>
+        </>
       ) : (
         <button onClick={() => setIsShowDetails(false)}>Return</button>
       )}
