@@ -8,17 +8,23 @@ import AnimeList from './browse-modules/AnimeList.jsx'
 import HeaderForSorting from '../../components/contextDetail/Header.jsx'
 
 const BrowsePage = () => {
-  const { getAnimeList, getPopularAnime, getAiringAnime, getUpComingAnime, isDetailShow, setIsShowDetails } =
-    useGlobalContext()
+  const { getAnimeList, isDetailShow, setIsShowDetails } = useGlobalContext()
   const [rendered, setRendered] = useState('popularity')
   const [pageIndex, setPageIndex] = useState(1)
   const [originList, setOriginList] = useState('popularity')
+
   useEffect(() => {
-    ;(rendered !== 'anime' && rendered !== 'search') ?? setOriginList(rendered)
+    if (rendered !== 'anime' && rendered !== 'search') {
+      setOriginList(rendered)
+    }
   }, [rendered])
 
   useEffect(() => {
-  }, [pageIndex])
+    setRendered('anime')
+    originList === 'popularity'
+      ? getAnimeList(originList, pageIndex)
+      : getAnimeList(originList, pageIndex, 'filter', 'top/')
+  }, [pageIndex, originList])
 
   useEffect(() => {
     if (isDetailShow === false) {
@@ -26,40 +32,15 @@ const BrowsePage = () => {
     }
   }, [isDetailShow])
 
-  const SwitchComponent = () => {
-    switch (rendered) {
-      case 'popularity':
-        return <PopularAnime rendered={rendered} />
-      case 'airing':
-        return <AiringAnime rendered={rendered} />
-      case 'upcoming':
-        return <UpComingAnime rendered={rendered} />
-      case 'anime':
-        return <AnimeList index={pageIndex} orderBy={originList} rendered={rendered} />
-      default:
-        return <PopularAnime rendered={rendered} />
-    }
+  const handleNextPage = () => {
+    setPageIndex((prev) => (prev < 100 ? prev + 1 : prev))
+    setRendered('anime')
   }
 
-  const handleClickNext = (direction) => {
-    if (!direction) {
-      setPageIndex((prev) => prev - 1)
-      setRendered('anime')
-    }    
-    if (pageIndex < 100 && direction) {
-      setPageIndex((prevPageIndex) => prevPageIndex + 1)
-      setRendered('anime')
-    } else {
-      direction ?? alert('Get some help')
-    }
+  const handlePrevPage = () => {
+    setPageIndex((prev) => (prev > 1 ? prev - 1 : 1))
+    setRendered('anime')
   }
-
-  useEffect(() => {
-    pageIndex > 1 ?? setRendered('anime')
-    originList === 'popularity'
-      ? getAnimeList(originList, pageIndex)
-      : getAnimeList(originList, pageIndex, 'filter', 'top/')
-  }, [pageIndex])
 
   const handleRenderButton = (sort) => {
     setRendered(sort)
@@ -67,21 +48,36 @@ const BrowsePage = () => {
     setPageIndex(1)
   }
 
+  const SwitchComponent = () => {
+    switch (rendered) {
+      case 'popularity':
+        return <PopularAnime rendered={rendered} pageIndex={pageIndex} />
+      case 'airing':
+        return <AiringAnime rendered={rendered} pageIndex={pageIndex} />
+      case 'upcoming':
+        return <UpComingAnime rendered={rendered} pageIndex={pageIndex} />
+      case 'anime':
+        return <AnimeList index={pageIndex} orderBy={originList} rendered={rendered} />
+      default:
+        return <PopularAnime rendered={rendered} pageIndex={pageIndex} />
+    }
+  }
+
   return (
     <div id="main">
       {!isDetailShow ? (
         <>
           <HeaderForSorting handleRenderButton={handleRenderButton} setRendered={setRendered} />
-            <div className="turn-page-button">
-              <button onClick={()=>handleClickNext(false)} className="prev-button">
-                Previous
-              </button>
-              <p>{pageIndex} / 100</p>
-              <button onClick={()=>handleClickNext('next')} className="next-button">
-                Next
-              </button>
-            </div>
-          </>
+          <div className="turn-page-button">
+            <button onClick={handlePrevPage} className="prev-button">
+              Previous
+            </button>
+            <p>{pageIndex} / 100</p>
+            <button onClick={handleNextPage} className="next-button">
+              Next
+            </button>
+          </div>
+        </>
       ) : (
         <button onClick={() => setIsShowDetails(false)}>Return</button>
       )}

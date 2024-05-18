@@ -1,50 +1,36 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../../../context/global.jsx'
-import Details from '../../../components/contextDetail/Details.jsx'
+import AnimeGridList from './AnimeGridList'
 
 const UpComingAnime = ({ rendered }) => {
-  const userLog = window.localStorage.getItem('LOGGED_IN')
-  const user = JSON.parse(userLog)
-  const { upcomingAnime, isDetailShow, setIsShowDetails, saveFavorite } = useGlobalContext()
+  const { upcomingAnime, getAnimeList, pageIndex } = useGlobalContext()
 
-  const [showDetails, setShowDetails] = useState(null)
+  const [currentPage, setCurrentPage] = useState(pageIndex)
   useEffect(() => {
-    if (showDetails) {
-      setIsShowDetails(true)
-    } else {
-      setIsShowDetails(false)
-    }
-  }, [showDetails])
+    getAnimeList('upcomingAnime', 'upcoming', currentPage)
+  }, [currentPage, getAnimeList])
 
-  const handleAddFavorite = async (anime, user) => {
-    await saveFavorite(anime, user)
+  const handleNextPage = () => {
+    setCurrentPage((prev) => prev + 1)
+  }
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => (prev > 1 ? prev - 1 : 1))
   }
 
-  return !isDetailShow && !showDetails ? (
-    <div className="grid-list" id="upcoming-list">
-      {rendered === 'upcoming' ? (
-        upcomingAnime.map((anime, index) => {
-          return (
-            <div className="card-container" key={index}>
-              <img src={anime.images.jpg.large_image_url} className="cover-pic" alt="cover" />
-              <div className="hidden">
-                <h3 className="title">{anime.title}</h3>
-                <p className="year">{anime.year}</p>
-              </div>
-              <div className="button-container">
-                <button onClick={() => setShowDetails(anime)}>Details</button>
-                <button onClick={() => handleAddFavorite(anime.mal_id, user.id)}>Add</button>
-              </div>
-            </div>
-          )
-        })
-      ) : (
-        <p>Not quite right ? . -.+ . ! </p>
-      )}
-    </div>
-  ) : (
-    <Details animeData={showDetails} />
+  return (
+    <AnimeGridList
+      animeList={upcomingAnime}
+      rendered={rendered}
+      type="upcoming"
+      pageIndex={currentPage}
+      handleNextPage={handleNextPage}
+      handlePrevPage={handlePrevPage}
+    />
   )
+}
+
+UpComingAnime.propTypes = {
+  rendered: PropTypes.string.isRequired,
 }
 
 export default UpComingAnime
