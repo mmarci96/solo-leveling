@@ -3,7 +3,6 @@ import BrowsePage from "./scenes/browsePage";
 import HomePage from "./scenes/homePage";
 import ProfilesPage from "./scenes/profilePage";
 import LoginPage from "./scenes/loginPage";
-import BetaDevelopment from "./scenes/beta-features";
 
 const App = () => {
   return (
@@ -13,7 +12,6 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/browse" element={<BrowsePage />} />
         <Route path="/profile" element={<ProfilesPage />} />
-        <Route path="/beta" element={<BetaDevelopment />} />
       </Routes>
     </BrowserRouter>
   )
