@@ -1,0 +1,25 @@
+{
+  "chat": [
+    {
+      "log": {
+        "userName": "admin",
+        "id": 9999,
+        "msg": "hi"
+      }
+    },
+    {
+      "log": {
+        "userName": "admin",
+        "id": 9999,
+        "msg": "hope it will work"
+      }
+    },
+    {
+      "log": {
+        "userName": "Marci",
+        "id": 1000,
+        "msg": "it will eventually"
+      }
+    }
+  ]
+}

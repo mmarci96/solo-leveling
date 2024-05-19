@@ -11,6 +11,37 @@ app.use(cors())
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const usersJsonPath = join(__dirname, 'users.json')
+const testChatPath = join(__dirname, './chat-logs/test-chat.json')
+
+app.get('/api/chat/:chatId', async (req, res) => {
+  try {
+    const chatRoom = req.params.chatId
+    const chatRoomPath = join(__dirname, `./chat-logs/${chatRoom}.json`)
+    const testChatLogs = await readFile(chatRoomPath, 'utf-8')
+
+    res.send(testChatLogs)
+  } catch (err) {
+    return res.status(404).send({ err, message: 'We could not find this chat' })
+  }
+})
+app.patch('/api/chat/:chatId', async (req, res) => {
+  try {
+    const chatRoom = req.params.chatId
+    const chatRoomPath = join(__dirname, `./chat-logs/${chatRoom}.json`) 
+    const testChatLogs = await readFile(chatRoomPath, 'utf-8')
+    const messages = await JSON.parse(testChatLogs).chat
+    const request = req.body
+    
+    const newMsg = { log: { id: request.userId, userName: request.userName, msg: request.chat } }
+    //const upDatedChat = messages.push(newMsg);
+    //const saveChatLog = JSON.stringify(upDatedChat, null, 2)
+    //await writeFile(chatRoomPath, saveChatLog, 'utf-8')
+
+    res.status(201).send({ message: 'Chat updated', newMsg })
+  } catch (err) {
+    res.status(500).send({ message: 'An error occurred', error: err.message })
+  }
+})
 
 app.get('/', (req, res) => {
   res.send('Hello from WeebHive backend!')
@@ -33,7 +64,7 @@ app.get('/api/users/:id', async (req, res) => {
 
     res.send(user)
   } catch (err) {
-    res.status(500).send({ message: 'An error occurred', error: error.message })
+    res.status(500).send({ message: 'An error occurred', error: err.message })
   }
 })
 
@@ -42,14 +73,13 @@ app.post('/api/users', async (req, res) => {
     const request = req.body
     const data = await readFile(usersJsonPath, 'utf-8')
     const users = await JSON.parse(data)
-    const id = users.users[users.users.length - 1].id + 1;
-    if(users.users.find(user=>user.id === id)){
+    const id = users.users[users.users.length - 1].id + 1
+    if (users.users.find((user) => user.id === id)) {
       request.id = id + 13
     }
     request.id = id
 
-
-    const favorites = [ ];
+    const favorites = []
     request.favorites = favorites
 
     users.users.push(request)
@@ -73,12 +103,11 @@ app.patch('/api/users/:id', async (req, res) => {
 
   const updateUsers = users.map((user) => {
     if (user.id === userId && !user.favorites.includes(anime_id.favorites)) {
-
       user.favorites.push(anime_id.favorites)
     }
     return user
   })
-  const final = {users: [...updateUsers]}
+  const final = { users: [...updateUsers] }
   const fml = JSON.stringify(final, null, 2)
   const updateJson = await writeFile(usersJsonPath, fml, 'utf-8')
 
