@@ -55,7 +55,7 @@ const BrowsePage = () => {
   }
 
   useEffect(() => {
-    pageIndex > 1 ?? setRendered('anime')
+    setRendered('anime')
     originList === 'popularity'
       ? getAnimeList(originList, pageIndex)
       : getAnimeList(originList, pageIndex, 'filter', 'top/')
