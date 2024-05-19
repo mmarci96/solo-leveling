@@ -48,6 +48,7 @@ button {
   transition: border-color 0.25s;
   transition: 0.3s ease;
   max-height: 45px;
+  min-width: fit-content;
 }
 button:hover {
   border-color: #353983;

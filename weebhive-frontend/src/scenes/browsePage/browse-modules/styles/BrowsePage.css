@@ -24,6 +24,7 @@
   max-width: 1024px;
   grid-gap: 5px;
   justify-content: center;
+  place-items: center;
 }
 
 /* Card Container */
