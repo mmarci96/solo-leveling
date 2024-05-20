@@ -141,7 +141,7 @@ export const GlobalContextProvider = ({ children }) => {
 
   useEffect(() => {
     getAnimeList('popularity', 1)
-    getPopularAnime()
+    //getPopularAnime()
   }, [])
 
   return (

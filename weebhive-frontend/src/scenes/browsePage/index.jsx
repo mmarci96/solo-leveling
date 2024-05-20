@@ -8,7 +8,7 @@ import AnimeList from './browse-modules/AnimeList.jsx'
 import HeaderForSorting from '../../components/contextDetail/Header.jsx'
 
 const BrowsePage = () => {
-  const { getAnimeList, getPopularAnime, getAiringAnime, getUpComingAnime, isDetailShow, setIsShowDetails } =
+  const { getAnimeList, isDetailShow, setIsShowDetails } =
     useGlobalContext()
   const [rendered, setRendered] = useState('popularity')
   const [pageIndex, setPageIndex] = useState(1)
@@ -16,9 +16,6 @@ const BrowsePage = () => {
   useEffect(() => {
     ;(rendered !== 'anime' && rendered !== 'search') ?? setOriginList(rendered)
   }, [rendered])
-
-  useEffect(() => {
-  }, [pageIndex])
 
   useEffect(() => {
     if (isDetailShow === false) {
