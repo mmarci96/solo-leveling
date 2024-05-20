@@ -168,3 +168,4 @@ export const GlobalContextProvider = ({ children }) => {
 export const useGlobalContext = () => {
   return useContext(GlobalContext)
 }
+
