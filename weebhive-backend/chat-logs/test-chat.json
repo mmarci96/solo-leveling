@@ -20,6 +20,13 @@
         "id": 1000,
         "msg": "it will eventually"
       }
+    },
+    {
+      "log": {
+        "id": 10000,
+        "userName": "Marci",
+        "msg": "this will work!"
+      }
     }
   ]
 }
